@@ -30,5 +30,9 @@ passport.use(new LocalStrategy({
 passport.use(new JWTStrategy({
   jwtFromRequest: ExtractJWT.fromAuthHeaderAsBearerToken(),
   secretOrKey: JWT_SECRET,
-}, (jwtPayload, callback) => Users.findById(jwtPayload._id).then((user) => callback(null, user))
-  .catch((error) => callback(error))));
+}, (jwtPayload, callback) => {
+  return Users.findById(jwtPayload._id)
+  .then((user) => callback(null, user))
+  .catch((error) => callback(error))
+}
+));

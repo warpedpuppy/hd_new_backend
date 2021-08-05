@@ -15,7 +15,7 @@ const { check, validationResult } = require('express-validator');
 const passport = require('passport');
 const config = require('./config');
 
-const { CONNECTION_URI } = config;
+const { CONNECTION_URI, PORT } = config;
 mongoose.connect(CONNECTION_URI, { useNewUrlParser: true, useUnifiedTopology: true });
 const Models = require('./models');
 const MoviesRouter = require('./movies/movies-router');
@@ -86,7 +86,7 @@ app.use((err, req, res, next) => {
   res.status(500).send('Ups, something went wrong. Please try again.');
 });
 
-const { PORT } = config;
+// const { PORT } = config;
 app.listen(PORT, '0.0.0.0', () => {
   /* eslint-disable-next-line */
   console.log(`Server is listening on port ${PORT || 8080}.`);
